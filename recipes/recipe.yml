@@ -30,7 +30,7 @@ modules:
         - kitty
 
         # Shell
-	- zsh
+        - zsh
         - starship
 
         # Document tools
