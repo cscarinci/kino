@@ -13,7 +13,7 @@ modules:
     files:
       - source: system
         destination: /
-	
+
   # ── System Packages ───────────────────────────────────────────
   - type: dnf
     repos:
@@ -23,43 +23,43 @@ modules:
       packages:
         # Input method
         - kime-git
-	# Editors
-	- emacs
-	- neovim
-	# LaTeX
-	- perl-core
-	# Document viewer
-	- zathura
-	- zathura-pdf-poppler
-	# Terminal
-	- alacritty
-	- kitty
-	# CLI
-	- eza
-	- zoxide
-	- btop
-	- bat
-	- ripgrep
-	- fd-find
-	- git-delta
-	- trash-cli
-	- fastfetch
-	- fzf
-	- jq
-	# Theming
-	- papirus-icon-theme
-	# Utilities
-	- chezmoi
-	- p7zip
-	- powertop
-	- podman-compose
-	- tailscale
-	- gh
+  # Editors
+  - emacs
+  - neovim
+  # LaTeX
+  - perl-core
+  # Document viewer
+  - zathura
+  - zathura-pdf-poppler
+  # Terminal
+  - alacritty
+  - kitty
+  # CLI
+  - eza
+  - zoxide
+  - btop
+  - bat
+  - ripgrep
+  - fd-find
+  - git-delta
+  - trash-cli
+  - fastfetch
+  - fzf
+  - jq
+  # Theming
+  - papirus-icon-theme
+  # Utilities
+  - chezmoi
+  - p7zip
+  - powertop
+  - podman-compose
+  - tailscale
+  - gh
     remove:
       packages:
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-	
+  
   # ── Brew ──────────────────────────────────────────────────────
   - type: brew
     nofile-limits: true
