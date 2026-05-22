@@ -8,13 +8,11 @@ base-image: ghcr.io/ublue-os/kinoite-main
 image-version: latest
 
 modules:
-  # ── Files ─────────────────────────────────────────────────────
   - type: files
     files:
       - source: system
         destination: /
 
-  # ── System Packages ───────────────────────────────────────────
   - type: dnf
     repos:
       copr:
@@ -60,12 +58,10 @@ modules:
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
   
-  # ── Brew ──────────────────────────────────────────────────────
   - type: brew
     nofile-limits: true
     brew-analytics: false
 
-  # ── Flatpaks ──────────────────────────────────────────────────
   - type: default-flatpaks
     configurations:
       - notify: false
@@ -97,7 +93,6 @@ modules:
       - notify: false
         scope: user
 
-  # ── Fonts ─────────────────────────────────────────────────────
   - type: fonts
     fonts:
       nerd-fonts:
@@ -110,7 +105,6 @@ modules:
         - Roboto
         - NotoSansKorean
 
-  # ── Systemd Services ──────────────────────────────────────────
   - type: systemd
     system:
       enabled:
@@ -119,10 +113,8 @@ modules:
       enabled:
         - emacs.service
 
-  # ── Scripts ───────────────────────────────────────────────────
   - type: script
     scripts:
       - dirs.sh
 
-  # ── Signing ───────────────────────────────────────────────────
   - type: signing
