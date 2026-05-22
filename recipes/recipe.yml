@@ -31,6 +31,7 @@ modules:
         - eza
         - zoxide
         - btop
+	- htop
         - bat
         - ripgrep
         - fd-find
@@ -46,6 +47,7 @@ modules:
         - podman-compose
         - tailscale
         - gh
+	
     remove:
       packages:
         - firefox
@@ -59,6 +61,11 @@ modules:
       - zsh-syntax-highlighting
       - isync
       - mu
+      - pandoc
+      - imagemagick
+      - ffmpeg
+      - rclone
+      - restic
 
   - type: default-flatpaks
     configurations:
@@ -76,6 +83,9 @@ modules:
           - com.github.zocker_160.SyncThingy
           - org.fedoraproject.MediaWriter
           - com.github.tchx84.Flatseal
+	  - org.kde.okular
+	  - com.usebottles.bottles
+	  - io.github.celluloid_player.Celluloid
       - notify: false
         scope: user
 
