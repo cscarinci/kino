@@ -30,6 +30,7 @@ modules:
         - kitty
 
         # Shell
+	- zsh
         - starship
 
         # Document tools
@@ -75,7 +76,7 @@ modules:
     nofile-limits: true
     brew-analytics: false
     install:
-      # Shell plugins
+      # Shell
       - zsh-autosuggestions
       - zsh-syntax-highlighting
 
