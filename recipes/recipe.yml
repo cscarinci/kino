@@ -16,6 +16,7 @@ modules:
     repos:
       copr:
         - toroidalfox/kime
+	- atim/starship
     install:
       packages:
         - kime-git
@@ -26,6 +27,7 @@ modules:
         - zathura-pdf-poppler
         - alacritty
         - kitty
+	- starship
         - eza
         - zoxide
         - btop
