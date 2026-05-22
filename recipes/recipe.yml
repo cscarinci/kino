@@ -75,25 +75,6 @@ modules:
   - type: brew
     nofile-limits: true
     brew-analytics: false
-    install:
-      # Shell
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-
-      # Mail
-      - isync
-      - mu
-
-      # Document processing
-      - pandoc
-
-      # Media
-      - imagemagick
-      - ffmpeg
-
-      # Cloud & backup
-      - rclone
-      - restic
 
   - type: default-flatpaks
     configurations:
