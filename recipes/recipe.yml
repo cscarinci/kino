@@ -59,7 +59,6 @@ modules:
         scope: system
         install:
           - app.zen_browser.zen
-          - com.mitchellh.ghostty
           - eu.betterbird.Betterbird
           - me.proton.Mail
           - com.spotify.Client
