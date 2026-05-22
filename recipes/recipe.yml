@@ -3,7 +3,6 @@
 
 name: kino
 description: My Kinoite image
-
 base-image: ghcr.io/ublue-os/kinoite-main
 image-version: latest
 
@@ -19,45 +18,37 @@ modules:
         - toroidalfox/kime
     install:
       packages:
-        # Input method
         - kime-git
-  # Editors
-  - emacs
-  - neovim
-  # LaTeX
-  - perl-core
-  # Document viewer
-  - zathura
-  - zathura-pdf-poppler
-  # Terminal
-  - alacritty
-  - kitty
-  # CLI
-  - eza
-  - zoxide
-  - btop
-  - bat
-  - ripgrep
-  - fd-find
-  - git-delta
-  - trash-cli
-  - fastfetch
-  - fzf
-  - jq
-  # Theming
-  - papirus-icon-theme
-  # Utilities
-  - chezmoi
-  - p7zip
-  - powertop
-  - podman-compose
-  - tailscale
-  - gh
+        - emacs
+        - neovim
+        - perl-core
+        - zathura
+        - zathura-pdf-poppler
+        - alacritty
+        - kitty
+        - eza
+        - zoxide
+        - btop
+        - bat
+        - ripgrep
+        - fd-find
+        - git-delta
+        - trash-cli
+        - fastfetch
+        - fzf
+        - jq
+        - papirus-icon-theme
+        - chezmoi
+        - p7zip
+        - powertop
+        - podman-compose
+        - tailscale
+        - gh
     remove:
       packages:
         - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-  
+        - firefox-langpacks
+
   - type: brew
     nofile-limits: true
     brew-analytics: false
@@ -67,26 +58,15 @@ modules:
       - notify: false
         scope: system
         install:
-          # Browser
           - app.zen_browser.zen
-
-          # Terminal
           - com.mitchellh.ghostty
-
-          # Communication
           - eu.betterbird.Betterbird
           - me.proton.Mail
-
-          # Media & productivity
           - com.spotify.Client
           - org.libreoffice.LibreOffice
-
-          # Security & networking
           - com.bitwarden.desktop
           - com.protonvpn.www
           - org.fkoehler.KTailctl
-
-          # Sync & system tools
           - com.github.zocker_160.SyncThingy
           - org.fedoraproject.MediaWriter
           - com.github.tchx84.Flatseal
