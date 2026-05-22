@@ -1,6 +1,5 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-
 name: kino
 description: My Kinoite image
 base-image: ghcr.io/ublue-os/kinoite-main
@@ -16,38 +15,57 @@ modules:
     repos:
       copr:
         - toroidalfox/kime
-	- atim/starship
+        - atim/starship
     install:
       packages:
+        # Input method
         - kime-git
+
+        # Editors
         - emacs
         - neovim
-        - perl-core
-        - zathura
-        - zathura-pdf-poppler
+
+        # Terminal
         - alacritty
         - kitty
-	- starship
+
+        # Shell
+        - starship
+
+        # Document tools
+        - zathura
+        - zathura-pdf-poppler
+        - perl-core
+
+        # Modern CLI
         - eza
-        - zoxide
-        - btop
-	- htop
         - bat
         - ripgrep
         - fd-find
+        - fzf
+        - zoxide
         - git-delta
         - trash-cli
         - fastfetch
-        - fzf
         - jq
-        - papirus-icon-theme
+
+        # System monitoring
+        - btop
+        - htop
+        - powertop
+
+        # Utilities
         - chezmoi
         - p7zip
-        - powertop
         - podman-compose
-        - tailscale
         - gh
-	
+
+        # Networking
+        - tailscale
+
+        # Theming
+        - papirus-icon-theme
+
     remove:
       packages:
         - firefox
@@ -57,13 +75,22 @@ modules:
     nofile-limits: true
     brew-analytics: false
     install:
+      # Shell plugins
       - zsh-autosuggestions
       - zsh-syntax-highlighting
+
+      # Mail
       - isync
       - mu
+
+      # Document processing
       - pandoc
+
+      # Media
       - imagemagick
       - ffmpeg
+
+      # Cloud & backup
       - rclone
       - restic
 
@@ -72,20 +99,31 @@ modules:
       - notify: false
         scope: system
         install:
+          # Browser
           - app.zen_browser.zen
+
+          # Communication
           - eu.betterbird.Betterbird
           - me.proton.Mail
+
+          # Media
           - com.spotify.Client
+          - io.github.celluloid_player.Celluloid
+
+          # Productivity
           - org.libreoffice.LibreOffice
+          - org.kde.okular
+
+          # Security & networking
           - com.bitwarden.desktop
           - com.protonvpn.www
           - org.fkoehler.KTailctl
+
+          # System tools
           - com.github.zocker_160.SyncThingy
           - org.fedoraproject.MediaWriter
           - com.github.tchx84.Flatseal
-	  - org.kde.okular
-	  - com.usebottles.bottles
-	  - io.github.celluloid_player.Celluloid
+          - com.usebottles.bottles
       - notify: false
         scope: user
 
