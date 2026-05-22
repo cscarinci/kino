@@ -54,6 +54,11 @@ modules:
   - type: brew
     nofile-limits: true
     brew-analytics: false
+    install:
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - isync
+      - mu
 
   - type: default-flatpaks
     configurations:
