@@ -63,6 +63,7 @@ modules:
 
         # Networking
         - tailscale
+        - syncthing
 
         # Theming
         - papirus-icon-theme
@@ -102,7 +103,6 @@ modules:
           - org.fkoehler.KTailctl
 
           # System tools
-          - com.github.zocker_160.SyncThingy
           - org.fedoraproject.MediaWriter
           - com.github.tchx84.Flatseal
           - com.usebottles.bottles
@@ -127,6 +127,7 @@ modules:
         - tailscaled.service
     user:
       enabled:
+        - syncthing.service
         - emacs.service
 
   - type: script
