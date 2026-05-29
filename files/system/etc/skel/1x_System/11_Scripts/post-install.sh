@@ -10,10 +10,10 @@ done
 echo "Network OK."
 
 # ── chezmoi ───────────────────────────────────────────────────
-echo "Applying dotfiles..."
-chezmoi init --source ~/1x_System/10_Config/dotfiles git@github.com:cscarinci/dotfiles.git
+echo "Applying chezmoi..."
+chezmoi init --source ~/1x_System/10_Config/dotfiles git@github.com:cscarinci/chezmoi.git
 chezmoi apply
-echo "Dotfiles applied."
+echo "Chezmoi applied."
 
 # ── Clone kino repo ───────────────────────────────────────────
 echo "Cloning kino repo..."
