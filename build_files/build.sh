@@ -2,6 +2,8 @@
 # kino image build - runs inside the Containerfile, bind-mounted at /ctx.
 set -ouex pipefail
 
+cp -avf /ctx/system_files/. /
+
 # ── Repos ────────────────────────────────────────────────────────────
 # (none - starship moved to brew with the rest of the modern CLI set,
 # which retired the atim/starship copr, the image's last third-party repo)
