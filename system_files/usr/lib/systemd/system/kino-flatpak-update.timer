@@ -1,0 +1,13 @@
+# Daily system flatpak update at 04:00, with a 6h retry so a run skipped
+# by the ExecCondition (no network that morning) doesn't wait a full day.
+# After a successful run the retries are cheap no-op registry checks.
+[Unit]
+Description=Daily kino system flatpak update
+
+[Timer]
+OnCalendar=04:00
+Persistent=true
+OnUnitInactiveSec=6h
+
+[Install]
+WantedBy=timers.target

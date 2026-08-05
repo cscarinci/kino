@@ -1,0 +1,18 @@
+# First-boot (and list-change) system flatpak installation.
+# On a fresh machine there is no Wi-Fi until the user connects, so the
+# first attempts die on DNS - Restart= keeps trying every 2 min until the
+# network is up. NOTE: Restart= on Type=oneshot is only loadable because
+# there is no RemainAfterExit=yes here; do not add it.
+[Unit]
+Description=Install kino system flatpaks
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/kino-flatpak-setup
+Restart=on-failure
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target

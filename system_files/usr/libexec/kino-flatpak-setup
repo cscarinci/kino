@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Install system flatpaks from /usr/share/kino/flatpaks. Idempotent:
+# a checksum stamp in /var/lib/kino skips the network entirely when the
+# list hasn't changed since the last successful run.
+set -euo pipefail
+
+list=/usr/share/kino/flatpaks
+stamp=/var/lib/kino/flatpak-setup.sha256
+
+cur=$(sha256sum "$list" | cut -d' ' -f1)
+if [[ -f $stamp && $(<"$stamp") == "$cur" ]]; then
+    exit 0
+fi
+
+# The base adds flathub at first boot too (flatpak-add-fedora-repos.service
+# - ublue's flathub unit renamed over Fedora's stock one), but that unit
+# has no ordering relationship with ours, so on a true first boot the two
+# can race. This line makes the script self-sufficient either way.
+flatpak remote-add --if-not-exists --system flathub \
+    https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# Per-app so one bad id doesn't hold the whole batch in a 2-minute
+# Restart loop forever; failures aggregate into a nonzero exit, which
+# retries only what is missing (installed apps no-op fast).
+mapfile -t apps < <(grep -vE '^[[:space:]]*(#|$)' "$list")
+failed=0
+for app in "${apps[@]}"; do
+    if ! flatpak install --system --noninteractive --or-update flathub "$app"; then
+        echo "kino-flatpak-setup: failed to install $app" >&2
+        failed=1
+    fi
+done
+if ((failed)); then
+    exit 1
+fi
+
+mkdir -p /var/lib/kino
+echo "$cur" >"$stamp"

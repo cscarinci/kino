@@ -1,0 +1,33 @@
+# System flatpaks installed on first boot by kino-flatpak-setup.service.
+# One app id per line; '#' comments and blank lines are ignored.
+# Changing this file re-triggers installation on the next boot (the
+# setup service stamps a checksum of it in /var/lib/kino).
+
+# Browser
+com.brave.Browser
+
+# Communication
+eu.betterbird.Betterbird
+ch.protonmail.protonmail-bridge
+org.telegram.desktop
+
+# Media
+com.spotify.Client
+io.github.celluloid_player.Celluloid
+
+# Productivity
+org.libreoffice.LibreOffice
+org.zotero.Zotero
+us.zoom.Zoom
+
+# Graphics
+org.gimp.GIMP
+org.inkscape.Inkscape
+
+# Security & networking
+com.bitwarden.desktop
+com.protonvpn.www
+org.fkoehler.KTailctl
+
+# System tools
+com.github.tchx84.Flatseal

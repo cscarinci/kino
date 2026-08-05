@@ -1,0 +1,11 @@
+# Daily user flatpak update at 04:00 with a 6h skip-retry.
+[Unit]
+Description=Daily kino user flatpak update
+
+[Timer]
+OnCalendar=04:00
+Persistent=true
+OnUnitInactiveSec=6h
+
+[Install]
+WantedBy=timers.target
