@@ -5,6 +5,8 @@ COPY system_files /system_files
 
 # Base Image
 FROM ghcr.io/ublue-os/kinoite-main:44
+# The tag pins the Fedora major - bump to 45 around Nov 2026 (F44 EOL
+# ~May 2027; past EOL the base tag silently freezes).
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:testing
 # FROM ghcr.io/ublue-os/aurora:stable
