@@ -162,3 +162,18 @@ jobs:
           # use old bundle format, so we can use newer cosign 3.X.X instead of 2.X.X
           cosign sign -y --new-bundle-format=false --use-signing-config=false --key env://COSIGN_PRIVATE_KEY ${IMAGE_REGISTRY}/${IMAGE_NAME}@${DIGEST}
 
+      - name: Dead-man ping
+        # This cron is the machines' only update channel, and cron death is
+        # silent: build failures email nobody reliably, and GitHub disables
+        # scheduled workflows after 60 days without repo activity. On ostree
+        # "no new image" == "no OS updates", so ABSENCE must alert:
+        # healthchecks.io pages when this ping stops arriving. No-op until
+        # the HEALTHCHECK_URL repo secret is set (see README).
+        env:
+          HC_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: |
+          if [ -n "$HC_URL" ]; then
+            curl -fsS -m 10 --retry 3 "$HC_URL" > /dev/null
+          else
+            echo "HEALTHCHECK_URL secret not set - skipping ping"
+          fi
