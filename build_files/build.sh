@@ -88,6 +88,39 @@ for font in "${NF_FONTS[@]}"; do
 done
 fc-cache --system-only --force
 
+# ── Signature enforcement ────────────────────────────────────────────
+# The template SIGNS the image in CI but ships nothing to VERIFY it: the
+# base only trusts ghcr.io/ublue-os, so without the three files below a
+# `ostree-image-signed:` rebase of this image silently falls through to
+# the policy's insecureAcceptAnything catch-all.
+#
+# Bootstrap note: the key authorising image N+1 ships inside image N, so
+# the FIRST rebase onto a kino image must be ostree-unverified-registry:.
+# Once deployed, ostree-image-signed: enforces for real.
+#
+# Written to /etc; ostree stores that as /usr/etc and 3-way merges it
+# into the live /etc at deploy time.
+install -Dm644 /ctx/cosign.pub /etc/pki/containers/kino.pub
+
+# Scoped to the single repo, not the whole ghcr.io/cscarinci namespace:
+# a bad key then breaks only this image's updates. Merged, never
+# replaced - the base's ublue-os/toolbx/redhat scopes must survive.
+policy=/etc/containers/policy.json
+jq '.transports.docker["ghcr.io/cscarinci/kino"] = [{
+      "type": "sigstoreSigned",
+      "keyPath": "/etc/pki/containers/kino.pub",
+      "signedIdentity": { "type": "matchRepository" }
+    }]' "$policy" > "$policy.new"
+mv "$policy.new" "$policy"
+
+# cosign publishes signatures as OCI attachments, not to a lookaside;
+# without this the policy above would find nothing and reject.
+install -Dm644 /dev/stdin /etc/containers/registries.d/kino.yaml <<'EOF'
+docker:
+  ghcr.io/cscarinci/kino:
+    use-sigstore-attachments: true
+EOF
+
 # ── Services ─────────────────────────────────────────────────────────
 systemctl enable tailscaled.service
 systemctl enable kino-flatpak-setup.service
