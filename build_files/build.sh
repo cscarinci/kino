@@ -63,19 +63,29 @@ dnf5 -y install \
 dnf5 -y remove firefox firefox-langpacks
 
 # ── Nerd fonts (not packaged in Fedora) ──────────────────────────────
-# Pinned release; bump deliberately. D2Coding = Korean monospace with
-# real Hangul glyphs for the terminal.
+# Pinned release; bump deliberately.
+#
+# Three families only. The full nine came to 1.8G installed, of which
+# 1.6G was referenced by nothing (Iosevka alone: 1.1G over 81 files).
+# Every entry below is load-bearing - find its consumer before dropping
+# one, because nothing fails loudly when a font goes missing:
+#
+#   JetBrainsMono         kitty.conf (all four faces) + emacs
+#                         cs/font-family
+#   D2Coding              fontconfig 59-korean-substitutes.conf rewrites
+#                         Gulim/GulimChe/Dotum/DotumChe to
+#                         "D2CodingLigature Nerd Font Mono" - Korean
+#                         monospace with real Hangul cells
+#   NerdFontsSymbolsOnly  icon glyph fallback for anything not using a
+#                         patched font (4.8M, cheap insurance)
+#
+# Adding one back is a one-line change; the price is image size plus a
+# network fetch on every build.
 NF_VERSION="v3.4.0"
 NF_FONTS=(
     JetBrainsMono
-    NerdFontsSymbolsOnly
-    FiraCode
-    Hack
-    SourceCodePro
-    CascadiaCode
-    Iosevka
-    Monaspace
     D2Coding
+    NerdFontsSymbolsOnly
 )
 for font in "${NF_FONTS[@]}"; do
     dir="/usr/share/fonts/nerd-fonts/${font}"
