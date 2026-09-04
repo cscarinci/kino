@@ -26,10 +26,15 @@ cp -avf /ctx/system_files/. /
 # that ships enabled=0). Installing them explicitly asserts presence at
 # every build: if the base reshuffles, the build either supplies them
 # or fails loudly - never silently ships without them.
+#
+# android-tools (adb + fastboot + udev rules): system package, not brew -
+# the brew cask ships Google's bare binaries without the udev rules that
+# let adb talk to Android devices unprivileged (Supernote sideloading).
 dnf5 -y install \
     emacs \
     autoconf \
     automake \
+    android-tools \
     poppler-glib-devel \
     libpng-devel \
     zlib-devel \
